@@ -34,10 +34,10 @@ class StudentListFragment : Fragment() {
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = studentListAdapter
 
-        observeViewModel()
+        observeViewModel(view)
     }
 
-    fun observeViewModel() {
+    fun observeViewModel(view: View) {
         viewModel.studentsLD.observe(viewLifecycleOwner, Observer {
             studentListAdapter.updateStudentList(it)
         })

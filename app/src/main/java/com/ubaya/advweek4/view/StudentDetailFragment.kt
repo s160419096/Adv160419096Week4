@@ -28,10 +28,10 @@ class StudentDetailFragment : Fragment() {
 
         viewModel.fetch()
 
-        observeViewModel()
+        observeViewModel(view)
     }
 
-    private fun observeViewModel() {
+    private fun observeViewModel(view: View) {
         viewModel.studentLD.observe(viewLifecycleOwner){
             val txtID = view.findViewById<TextInputEditText>(R.id.txtID)
             val txtName = view.findViewById<TextInputEditText>(R.id.txtName)
