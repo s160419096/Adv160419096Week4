@@ -1,6 +1,5 @@
 package com.ubaya.advweek4.view
 
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +8,10 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ubaya.advweek4.R
 import com.ubaya.advweek4.model.Student
-import org.w3c.dom.Text
+import com.ubaya.advweek4.util.loadImage
 
 class StudentListAdapter(val studentList:ArrayList<Student>)
     : RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>(){
@@ -48,17 +46,18 @@ class StudentListAdapter(val studentList:ArrayList<Student>)
         val imageView = holder.view.findViewById<ImageView>(R.id.imageView)
         val progressBar = holder.view.findViewById<ProgressBar>(R.id.progressBar)
 
+        imageView.loadImage(studentList[position].photoUrl, progressBar)
+
         val student = studentList[position]
         with(holder.view){
             txtID.text = student.id.toString()
             txtName.text = student.name.toString()
 
             btnDetail.setOnClickListener{
-                val action = StudentListFragmentDirections.actionStudentDetail()
+                val id = studentList[position].id
+                val action = StudentListFragmentDirections.actionStudentDetail(id!!)
                 Navigation.findNavController(it).navigate(action)
             }
-
-//            imageView.loadImage
         }
     }
 

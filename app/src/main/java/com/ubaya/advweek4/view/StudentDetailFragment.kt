@@ -1,15 +1,19 @@
 package com.ubaya.advweek4.view
 
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.ubaya.advweek4.R
+import com.ubaya.advweek4.util.loadImage
 import com.ubaya.advweek4.viewmodel.DetailViewModel
 
 class StudentDetailFragment : Fragment() {
@@ -24,9 +28,15 @@ class StudentDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        var studentID = ""
+        if(arguments != null){
+            studentID =
+                StudentDetailFragmentArgs.fromBundle(requireArguments()).studentID.toString()
+        }
+
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
 
-        viewModel.fetch()
+        viewModel.fetch(studentID)
 
         observeViewModel(view)
     }
@@ -37,6 +47,10 @@ class StudentDetailFragment : Fragment() {
             val txtName = view.findViewById<TextInputEditText>(R.id.txtName)
             val txtBod = view.findViewById<TextInputEditText>(R.id.txtBod)
             val txtPhone = view.findViewById<TextInputEditText>(R.id.txtPhone)
+            val imageViewDetail = view.findViewById<ImageView>(R.id.imageViewDetail)
+            val progressBarDetail = view.findViewById<ProgressBar>(R.id.progressBarDetail)
+
+            imageViewDetail.loadImage(it.photoUrl, progressBarDetail)
 
             txtID.setText(it.id)
             txtName.setText(it.name)
