@@ -2,11 +2,16 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
 }
 
 android {
     namespace 'com.ubaya.advweek4'
     compileSdk 33
+
+    dataBinding{
+        enabled true
+    }
 
     defaultConfig {
         applicationId "com.ubaya.advweek4"

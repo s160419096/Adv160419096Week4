@@ -1,8 +1,10 @@
 package com.ubaya.advweek4.util
 
+import android.media.Image
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.ubaya.advweek4.R
@@ -21,4 +23,9 @@ fun ImageView.loadImage(url: String?, progressBar: ProgressBar){
             override fun onError(e: Exception?) {
             }
         })
+}
+
+@BindingAdapter("android:imageUrl","android:progressBar")
+fun loadPhotoURL(view: ImageView,url: String?,progressBar: ProgressBar){
+    view.loadImage(url,progressBar)
 }
